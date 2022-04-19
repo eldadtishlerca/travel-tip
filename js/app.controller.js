@@ -53,3 +53,12 @@ function onPanTo() {
   console.log('Panning the Map')
   mapService.panTo(35.6895, 139.6917)
 }
+
+function renderMarkerLocations(marker) {
+  const elLocationBox = document.querySelector('.location-table')
+  markerHtml = `
+  <h2>${marker.title} , ${marker.position}</h2>
+  `
+  elLocationBox.innerHTML += markerHtml
+}
+renderMarkerLocations()
