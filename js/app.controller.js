@@ -25,10 +25,10 @@ function getPosition() {
 }
 
 function onAddMarker() {
-  console.log(mapService.getCurrPos())
+  console.log(mapService.getCurrMarker())
   console.log('Adding a marker')
-  const marker = mapService.addMarker()
-  renderMarkerLocations(marker)
+  mapService.addMarker()
+  renderMarkerLocations(mapService.getSavedMarkers)
 }
 
 function onGetLocs() {

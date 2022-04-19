@@ -5,15 +5,19 @@ export const mapService = {
   initMap,
   addMarker,
   panTo,
-  getCurrPos,
+  getCurrMarker,
+  getSavedMarkers,
 }
 
 var gMap
-var savedMarkers
+var gSavedMarkers = []
 var gCurrMarker = {
   lat: 0,
   lng: 0,
   name: '',
+  id: 0,
+  createAt: null,
+  updateAt: null,
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -37,29 +41,30 @@ function setMarkerPos(pos, map) {
     position: pos,
     map: map,
     name: prompt('Enter place name'),
+    id: utils.makeId(),
+    createAt: new Date(),
+    updateAt: updateDate(),
   })
   gCurrMarker.lat = marker.getPosition().lat()
   gCurrMarker.lng = marker.getPosition().lng()
   gCurrMarker.name = marker.name
+  gCurrMarker.id = marker.id
+  gCurrMarker.createAt = marker.createAt
+  gCurrMarker.updateAt = marker.updateAt
 }
 
 function getCurrMarker() {
   return gCurrMarker
 }
 
+function getSavedMarkers() {
+  return gSavedMarkers
+}
+
 function addMarker() {
-  var marker = new google.maps.Marker({
-    position: gCurrPos,
-    map: gMap,
-    title: gCurrPos.name,
-    id: utils.makeId(),
-    createAt: new Date(),
-    updateAt: updateDate(),
-    weather: 'weather',
-  })
-  console.log(marker.id)
-  storageService.save('markesDB', marker)
-  return marker
+  gSavedMarkers.push(gCurrMarker)
+  storageService.save('markesDB', gSavedMarkers)
+  return gSavedMarkers
 }
 
 function panTo(lat, lng) {
@@ -82,5 +87,5 @@ function _connectGoogleApi() {
 }
 
 function updateDate() {
-  // updateDate
+  return new Date()
 }
