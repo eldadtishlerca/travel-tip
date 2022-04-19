@@ -3,22 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
     <title>Travel Trip</title>
   </head>
   <body>
-    <h1>TravelTip Starter</h1>
-    <div id="map" style="width: 100%; height: 400px"></div>
-    <button onclick="onAddMarker()" class="btn-add-marker">
-      Add Marker Speific Location
-    </button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">
-      Get User Position
-    </button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
-
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: <span class="locs"></span></p>
+    <div class="page-layout">
+      <header>
+        <div class="title-wrapper">
+          <h1 class="title-hero">TravelTip</h1>
+        </div>
+        <section class="utils-btns">
+          <div class="utils-btns-item search-input-wrapper">
+            <input
+              type="search"
+              placeholder="Enter location"
+              name="search-location"
+              onchange="onSearchLocation()"
+              class="search-input utils-btn"
+            />
+          </div>
+          <div class="utils-btns-item search-location-wrapper">
+            <button class="btn-submit utils-btn" onclick="onSearchLocation()">
+              GO
+            </button>
+          </div>
+          <div class="utils-btns-item btn-mylocation-wrapper">
+            <button onclick="onMyLocation()" class="btn-mylocation utils-btn">
+              My Location
+            </button>
+          </div>
+        </section>
+      </header>
+      <hero>
+        <section>
+          <p class="location-wrapper">
+            Location: <span class="user-pos"></span>
+          </p>
+          <button onclick="onGetUserPos()" class="btn-user-pos" hidden>
+            Get User Position
+          </button>
+        </section>
+      </hero>
+      <main class="main-wrapper">
+        <div class="map-wrapper">
+          <div id="map" style="width: 100%; height: 100%"></div>
+          <div class="map-btns">
+            <button onclick="onAddMarker()" class="btn-add-marker">
+              Add Marker Speific Location
+            </button>
+            <button onclick="onGetLocs()" class="btn-get-locs">
+              Get Locations
+            </button>
+            <button onclick="onPanTo()" class="btn-pan">
+              Pan Map to Tokyo
+            </button>
+          </div>
+        </div>
+        <div class="container-wrapper">
+          <div class="weather-table">
+            <h4>weather today</h4>
+          </div>
+          <div class="location-table">
+            <p>Locations: <span class="locs"></span></p>
+          </div>
+        </div>
+      </main>
+    </div>
     <script type="module" src="js/app.controller.js"></script>
   </body>
 </html>

@@ -1,0 +1,174 @@
+@font-face {
+ font-family: rubik;
+ src: url(/fonts/rubik/Rubik-Regular.ttf);
+}
+
+@font-face {
+ font-family: rubik-bold;
+ src: url(/fonts/rubik/Rubik-Bold.ttf);
+}
+
+* {
+ display: border-box;
+ padding: 0;
+ margin: 0;
+}
+
+body {
+ background-color: #F68658;
+ font-family: rubik;
+}
+
+button {
+ cursor: pointer;
+ background-color: #7F7F7F;
+ border: 1px solid #385D8A;
+ color: #f1f1f1;
+ font-size: 1.125rem;
+ transition: all 0.25s ease-in-out;
+}
+
+button:hover {
+ background-color: #666666;
+}
+
+input {
+ border: 1px solid #385D8A;
+}
+
+.page-layout {
+ margin: 0.5rem 1rem;
+}
+
+.title-hero {
+ font-family: rubik-bold;
+}
+
+.utils-btns {
+ display: flex;
+ flex-direction: row;
+ align-items:center;
+ margin-top: 0.8rem;
+}
+
+.utils-btns-item {
+ height: 2rem;
+}
+
+.utils-btn {
+ height: 100%;
+ display: flex;
+ align-items: center;
+ justify-content:center;
+}
+
+/* .search-input-wrapper {
+ width: 4rem;
+} */
+
+.search-input {
+ background-color: #D9D7D7;
+ font-size: 1rem;
+ padding-left: 0.75rem;
+}
+
+/* .search-input:focus {
+ border: 1px solid transparent;
+} */
+
+.search-input::placeholder {
+ color: #385D8A;
+}
+
+.search-location-wrapper {
+ width: 4rem;
+ margin-left: 0.05rem;
+}
+
+.btn-submit {
+ width: 100%;
+}
+
+.btn-mylocation-wrapper {
+ margin-left: 2rem;
+ width: 8rem;
+}
+
+.btn-mylocation {
+ width: 100%;
+}
+
+.location-wrapper {
+ margin: 1rem 0;
+ font-family: rubik-bold;
+ font-size: 1.3rem;
+}
+
+.map-btns {
+ margin-top: 0.5rem;
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+ height: 3rem;
+}
+
+.map-btns button {
+ height:100%;
+ font-size: 1rem;
+ padding: 0 0.2rem;
+}
+
+.container-wrapper {
+ margin-top: 1rem;
+ display:flex;
+ justify-content: space-between;
+ height: 15.625rem;
+}
+
+.weather-table {
+ background-color: #D9D7D7;
+ width: 47.5%;
+}
+
+.location-table {
+ background-color: #385D8A;
+ width: 47.5%;
+}
+
+/* Tablets */
+@media only screen and (min-width:670px) {
+ html {
+  font-size: 22px;
+ }
+}
+
+@media only screen and (min-width:1030px) {
+ .page-layout {
+  margin: 0.5rem 6rem;
+ }
+ .main-wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  height: 500px;
+ }
+ .map-wrapper {
+  width: 49%;
+ }
+ .container-wrapper {
+  margin-top: unset;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 49%;
+  height: 100%;
+ }
+ .weather-table,
+ .location-table {
+  width: 100%;
+  height: 100%;
+ }
+
+ .weather-table {
+  margin-bottom: 0.7rem;
+ }
+}
