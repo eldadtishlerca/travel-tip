@@ -58,13 +58,13 @@ function getCurrMarker() {
 }
 
 function getSavedMarkers() {
-  return gSavedMarkers
+  const markers = storageService.load('markesDB')
+  return markers
 }
 
 function addMarker() {
   gSavedMarkers.push(gCurrMarker)
   storageService.save('markesDB', gSavedMarkers)
-  return gSavedMarkers
 }
 
 function panTo(lat, lng) {

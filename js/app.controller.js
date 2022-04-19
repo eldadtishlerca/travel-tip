@@ -28,7 +28,7 @@ function onAddMarker() {
   console.log(mapService.getCurrMarker())
   console.log('Adding a marker')
   mapService.addMarker()
-  renderMarkerLocations(mapService.getSavedMarkers)
+  renderMarkerLocations()
 }
 
 function onGetLocs() {
@@ -55,13 +55,17 @@ function onPanTo() {
   mapService.panTo(35.6895, 139.6917)
 }
 
-function renderMarkerLocations(markersArr) {
+function renderMarkerLocations() {
   const elLocationBox = document.querySelector('.location-table')
-
-  markerHtmls = markersArr.map((marker) => {
-    ;`
-    <h2>${marker.title} , ${marker.position}</h2>
-    `
-  })
-  elLocationBox.innerHTML += markerHtml
+  const markers = mapService.getSavedMarkers()
+  elLocationBox.innerHTML = markers.map(
+    (marker) =>
+      `<div class="mark-item" id="${marker.id}">
+        <h4>${marker.name}</h4>
+        <div class="">
+        <div>lat: ${marker.lat}, lng: ${marker.lng}</div>
+        <div><button class="btn-delete" onclick="onDeleteMark('${marker.id}')">X</button></div>
+        </div>
+      </div>`
+  )
 }
