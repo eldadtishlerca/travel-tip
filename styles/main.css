@@ -119,7 +119,7 @@ input {
 }
 
 .container-wrapper {
- margin-top: 1rem;
+ margin-top: 5rem;
  display:flex;
  justify-content: space-between;
  height: 15.625rem;
@@ -133,6 +133,10 @@ input {
 .location-table {
  background-color: #385D8A;
  width: 47.5%;
+}
+
+.map-wrapper {
+ height: 400px;
 }
 
 /* Tablets */
