@@ -13,6 +13,9 @@
  padding: 0;
  margin: 0;
 }
+html {
+    font-size: 18px;
+}
 
 body {
  background-color: #F68658;
@@ -62,19 +65,12 @@ input {
  justify-content:center;
 }
 
-/* .search-input-wrapper {
- width: 4rem;
-} */
 
 .search-input {
  background-color: #D9D7D7;
  font-size: 1rem;
  padding-left: 0.75rem;
 }
-
-/* .search-input:focus {
- border: 1px solid transparent;
-} */
 
 .search-input::placeholder {
  color: #385D8A;
@@ -138,18 +134,30 @@ input {
 .map-wrapper {
  height: 400px;
 }
+footer {
+    display: flex;
+    margin-bottom: 0;
+    margin-top: 7rem;
+    justify-content: center;
+}
 
 /* Tablets */
 @media only screen and (min-width:670px) {
  html {
   font-size: 22px;
- }
 }
-
+footer {
+  margin-top: 1.3rem;
+}
+}
+/*PC */
 @media only screen and (min-width:1030px) {
- .page-layout {
-  margin: 0.5rem 6rem;
- }
+    .page-layout {
+        margin: 0.5rem 4rem;
+    }
+    footer {
+      margin-top: 16rem;
+    }
  .main-wrapper {
   display: flex;
   flex-direction: row-reverse;
