@@ -1,10 +1,16 @@
 export const mapService = {
   initMap,
   addMarker,
+  setMarker,
   panTo,
 }
 
+import { storageService } from '/storage-services.js'
+console.log(storageService)
+
 var gMap
+var lat = 32.0749831
+var lng = 34.9120554
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   console.log('InitMap')
@@ -15,7 +21,20 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
       zoom: 15,
     })
     console.log('Map!', gMap)
+
+    google.maps.event.addListener(gMap, 'click', (ev) => {
+      setMarker(ev)
+    })
   })
+}
+
+function setMarker(ev) {
+  var marker = new google.maps.Marker({
+    position: ev.latLng,
+    map: gMap,
+    title: 'new marker',
+  })
+  return marker
 }
 
 function addMarker(loc) {
