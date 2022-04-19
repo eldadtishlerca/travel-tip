@@ -1,5 +1,6 @@
 import { storageService } from './storage.service.js'
 import { utils } from './utils.service.js'
+import { weatherService } from './weather.service.js'
 
 export const mapService = {
   initMap,
@@ -7,6 +8,7 @@ export const mapService = {
   panTo,
   getCurrMarker,
   getSavedMarkers,
+  deleteMark,
 }
 
 var gMap
@@ -18,6 +20,7 @@ var gCurrMarker = {
   id: 0,
   createAt: null,
   updateAt: null,
+  weather: {},
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -30,6 +33,25 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     })
     console.log('Map!', gMap)
 
+    var map = gMap
+
+    const markers = getSavedMarkers()
+    if (!markers) {
+      console.log('No Markers')
+    } else {
+      markers.forEach((marker) => {
+        console.log(marker)
+        lat = marker.lat
+        lng = marker.lng
+        const nameMarker = marker.name
+        return new google.maps.Marker({
+          position: { lat, lng },
+          map,
+          title: nameMarker,
+        })
+      })
+    }
+
     google.maps.event.addListener(gMap, 'click', (event) => {
       setMarkerPos(event.latLng, gMap)
     })
@@ -40,25 +62,32 @@ function setMarkerPos(pos, map) {
   var marker = new google.maps.Marker({
     position: pos,
     map: map,
-    name: prompt('Enter place name'),
+    title: prompt('Enter place name'),
     id: utils.makeId(),
     createAt: new Date(),
     updateAt: updateDate(),
   })
   gCurrMarker.lat = marker.getPosition().lat()
   gCurrMarker.lng = marker.getPosition().lng()
-  gCurrMarker.name = marker.name
+  gCurrMarker.name = marker.title
   gCurrMarker.id = marker.id
   gCurrMarker.createAt = marker.createAt
   gCurrMarker.updateAt = marker.updateAt
+  weatherService.initWeather(gCurrMarker.lat, gCurrMarker.lng)
 }
 
 function getCurrMarker() {
+  gCurrMarker.weather = weatherService.getCurrWeather()
   return gCurrMarker
 }
 
 function getSavedMarkers() {
   const markers = storageService.load('markesDB')
+  if (!markers) {
+    gSavedMarkers = []
+  } else {
+    gSavedMarkers = markers
+  }
   return markers
 }
 
@@ -88,4 +117,9 @@ function _connectGoogleApi() {
 
 function updateDate() {
   return new Date()
+}
+
+function deleteMark(id) {
+  gSavedMarkers.splice(id, 1)
+  storageService.save('markesDB', gSavedMarkers)
 }

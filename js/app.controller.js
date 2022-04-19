@@ -6,6 +6,7 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onDeleteMark = onDeleteMark
 
 function onInit() {
   mapService
@@ -14,6 +15,9 @@ function onInit() {
       console.log('Map is ready')
     })
     .catch(() => console.log('Error: cannot init map'))
+
+  mapService.getSavedMarkers()
+  renderMarkerLocations()
 }
 
 // This function provides a Promise API to the callback-based-api of getCurrentPosition
@@ -64,8 +68,17 @@ function renderMarkerLocations() {
         <h4>${marker.name}</h4>
         <div class="">
         <div>lat: ${marker.lat}, lng: ${marker.lng}</div>
-        <div><button class="btn-delete" onclick="onDeleteMark('${marker.id}')">X</button></div>
+        <div>
+          <button class="btn-center" onclick="onCenterLocation('${marker.id}')">GO</button>
+          <button class="btn-delete" onclick="onDeleteMark('${marker.id}')">X</button>
+        </div>
         </div>
       </div>`
   )
+}
+
+function onDeleteMark(id) {
+  mapService.deleteMark(id)
+  onInit()
+  renderMarkerLocations()
 }
