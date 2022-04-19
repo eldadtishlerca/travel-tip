@@ -27,7 +27,8 @@ function getPosition() {
 function onAddMarker() {
   console.log(mapService.getCurrPos())
   console.log('Adding a marker')
-  mapService.addMarker()
+  const marker = mapService.addMarker()
+  renderMarkerLocations(marker)
 }
 
 function onGetLocs() {
@@ -61,4 +62,3 @@ function renderMarkerLocations(marker) {
   `
   elLocationBox.innerHTML += markerHtml
 }
-renderMarkerLocations()

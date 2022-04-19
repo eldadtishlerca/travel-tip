@@ -10,7 +10,7 @@ export const mapService = {
 
 var gMap
 var savedMarkers
-var gCurrPos = {
+var gCurrMarker = {
   lat: 0,
   lng: 0,
   name: '',
@@ -38,13 +38,13 @@ function setMarkerPos(pos, map) {
     map: map,
     name: prompt('Enter place name'),
   })
-  gCurrPos.lat = marker.getPosition().lat()
-  gCurrPos.lng = marker.getPosition().lng()
-  gCurrPos.name = marker.name
+  gCurrMarker.lat = marker.getPosition().lat()
+  gCurrMarker.lng = marker.getPosition().lng()
+  gCurrMarker.name = marker.name
 }
 
-function getCurrPos() {
-  return gCurrPos
+function getCurrMarker() {
+  return gCurrMarker
 }
 
 function addMarker() {
@@ -55,9 +55,10 @@ function addMarker() {
     id: utils.makeId(),
     createAt: new Date(),
     updateAt: updateDate(),
+    weather: 'weather',
   })
-  console.log(marker.position)
-
+  console.log(marker.id)
+  storageService.save('markesDB', marker)
   return marker
 }
 
