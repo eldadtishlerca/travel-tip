@@ -51,7 +51,7 @@ function addMarker() {
   var marker = new google.maps.Marker({
     position: gCurrPos,
     map: gMap,
-    title: 'Hello World!',
+    title: gCurrPos.name,
     id: utils.makeId(),
     createAt: new Date(),
     updateAt: updateDate(),
