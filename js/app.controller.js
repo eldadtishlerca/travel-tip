@@ -55,10 +55,13 @@ function onPanTo() {
   mapService.panTo(35.6895, 139.6917)
 }
 
-function renderMarkerLocations(marker) {
+function renderMarkerLocations(markersArr) {
   const elLocationBox = document.querySelector('.location-table')
-  markerHtml = `
-  <h2>${marker.title} , ${marker.position}</h2>
-  `
+
+  markerHtmls = markersArr.map((marker) => {
+    ;`
+    <h2>${marker.title} , ${marker.position}</h2>
+    `
+  })
   elLocationBox.innerHTML += markerHtml
 }
