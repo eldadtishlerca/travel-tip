@@ -1,12 +1,11 @@
+import { storageService } from './storage.service.js'
+
 export const mapService = {
   initMap,
   addMarker,
   setMarker,
   panTo,
 }
-
-import { storageService } from '/storage-services.js'
-console.log(storageService)
 
 var gMap
 var lat = 32.0749831
