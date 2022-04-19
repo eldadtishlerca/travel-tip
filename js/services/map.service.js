@@ -1,15 +1,20 @@
 import { storageService } from './storage.service.js'
+import { utils } from './utils.service.js'
 
 export const mapService = {
   initMap,
   addMarker,
-  setMarker,
   panTo,
+  getCurrPos,
 }
 
 var gMap
-var lat = 32.0749831
-var lng = 34.9120554
+var savedMarkers
+var gCurrPos = {
+  lat: 0,
+  lng: 0,
+  name: '',
+}
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
   console.log('InitMap')
@@ -21,27 +26,38 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     })
     console.log('Map!', gMap)
 
-    google.maps.event.addListener(gMap, 'click', (ev) => {
-      setMarker(ev)
+    google.maps.event.addListener(gMap, 'click', (event) => {
+      setMarkerPos(event.latLng, gMap)
     })
   })
 }
 
-function setMarker(ev) {
+function setMarkerPos(pos, map) {
   var marker = new google.maps.Marker({
-    position: ev.latLng,
-    map: gMap,
-    title: 'new marker',
+    position: pos,
+    map: map,
+    name: prompt('Enter place name'),
   })
-  return marker
+  gCurrPos.lat = marker.getPosition().lat()
+  gCurrPos.lng = marker.getPosition().lng()
+  gCurrPos.name = marker.name
 }
 
-function addMarker(loc) {
+function getCurrPos() {
+  return gCurrPos
+}
+
+function addMarker() {
   var marker = new google.maps.Marker({
-    position: loc,
+    position: gCurrPos,
     map: gMap,
     title: 'Hello World!',
+    id: utils.makeId(),
+    createAt: new Date(),
+    updateAt: updateDate(),
   })
+  console.log(marker.position)
+
   return marker
 }
 
@@ -62,4 +78,8 @@ function _connectGoogleApi() {
     elGoogleApi.onload = resolve
     elGoogleApi.onerror = () => reject('Google script failed to load')
   })
+}
+
+function updateDate() {
+  // updateDate
 }
